@@ -9,5 +9,5 @@ I can see. I hope I can help you capture some of the joy that coding
 has brought me.  
 
 If you see anything on here that does't make sense or you have any 
-question, please don't hesitate to reach out to me. 
+questions, please don't hesitate to reach out to me. 
 
