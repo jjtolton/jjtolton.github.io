@@ -1,0 +1,13 @@
+title: Jay's Notes
+email: jjtolton@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+   Hi!  I'm Jay, and I love coding!  Especially in the style of Functional Programming.
+   I've made some notes about things that are important to me.  I hope you find them helpful
+   in your journey!
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://hiimjayhireme.github.io" # the base hostname & protocol for your site
+github_username:  HiImJayHireMe
+
+# Build settings
+markdown: kramdown
