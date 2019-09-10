@@ -10,8 +10,8 @@
   <meta name="description" content="Intended AudienceThis article is for two types of readers:  You’re tired of Python’s training wheels.  You want to use Functional Programming.  You understan...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/python/fp/functional/2019/09/08/how-to-reduce-python.html">
-  <link rel="alternate" type="application/rss+xml" title="Jay's Notes" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="http://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html">
+  <link rel="alternate" type="application/rss+xml" title="Jay's Notes" href="http://hiimjayhireme.github.io/feed.xml">
 </head>
 
 
@@ -79,7 +79,7 @@ category and so you need to understand how <code class="highlighter-rouge">reduc
 
 <p>This article will not directly cover:</p>
 <ul>
-  <li>How <code class="highlighter-rouge">reduce</code> works</li>
+  <li><a href="/python/fp/functional/reduce/2019/09/09/how-reduce-works.html">How <code class="highlighter-rouge">reduce</code> works</a></li>
   <li>Why and when to use <code class="highlighter-rouge">reduce</code></li>
   <li>Good style for writing <code class="highlighter-rouge">reduce</code></li>
   <li>Advanced patterns using <code class="highlighter-rouge">reduce</code></li>
@@ -206,7 +206,7 @@ code comments, <code class="highlighter-rouge">xs</code>, the <code class="highl
 (<code class="highlighter-rouge">initial</code>) or the <code class="highlighter-rouge">reduce</code> function on line 13 are all a <em>list</em>.</p>
 
 <p>Here you can see the operation occuring explicitly:</p>
-<iframe width="100%" height="600" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=15&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe>
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=15&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe>
 
 <p>In future articles we’ll cover:</p>
 

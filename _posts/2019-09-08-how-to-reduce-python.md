@@ -17,7 +17,7 @@ This article is for two types of readers:
 This article is about how to read and write code using `reduce`.  
 
 This article will not directly cover:
-* How `reduce` works
+* [How `reduce` works]({% post_url 2019-09-09-how-reduce-works %})
 * Why and when to use `reduce`
 * Good style for writing `reduce`
 * Advanced patterns using `reduce`
@@ -146,7 +146,7 @@ code comments, `xs`, the `return` of `next_csum`, and the third argument
 (`initial`) or the `reduce` function on line 13 are all a _list_.
 
 Here you can see the operation occuring explicitly:
-<iframe width="100%" height="600" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=15&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=15&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 In future articles we'll cover:
 

@@ -4,39 +4,165 @@
     <title>Jay's Notes</title>
     <description>Hi!  I'm Jay, and I love coding!  Especially in the style of Functional Programming. I've made some notes about things that are important to me.  I hope you find them helpful in your journey!
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 08 Sep 2019 20:17:45 -0400</pubDate>
-    <lastBuildDate>Sun, 08 Sep 2019 20:17:45 -0400</lastBuildDate>
+    <link>http://hiimjayhireme.github.io/</link>
+    <atom:link href="http://hiimjayhireme.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 09 Sep 2019 21:56:12 -0400</pubDate>
+    <lastBuildDate>Mon, 09 Sep 2019 21:56:12 -0400</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>How Python's reduce works</title>
+        <description>&lt;h2 id=&quot;intended-audience&quot;&gt;Intended Audience&lt;/h2&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;You’ve have a basic idea of how &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt; work, but &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt;
+remains elusive and you want to learn more about it.
+You might even be flirting with the forbidden path 
+of Functional Programming.&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;h2 id=&quot;what-this-article-covers&quot;&gt;What this article covers&lt;/h2&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;js/window&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hi, #{name}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;'Tom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prints&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;'Hi,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; works&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;what-this-article-doesnt-cover&quot;&gt;What this article doesn’t cover&lt;/h2&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/fp/functional/2019/09/08/how-to-reduce-python.html&quot;&gt;How to write &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;When and where to use &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; (and when not to!)&lt;/li&gt;
+  &lt;li&gt;Good &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; style&lt;/li&gt;
+  &lt;li&gt;Advanced &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; patterns&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These topics will be covered in other articles and linked here
+as they become available.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-this-reduce-thing&quot;&gt;What is this &lt;strong&gt;reduce&lt;/strong&gt; thing?&lt;/h2&gt;
+
+&lt;p&gt;If you can read the following code, this will explain it concisely 
+(and if you can’t, don’t worry – we’ll go over it).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# NOTE: this is for demonstrative purposes only,&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   ..: not the actual implementation&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This version&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; takes three arguments:&lt;/p&gt;
+
+&lt;h3 id=&quot;the-fold&quot;&gt;The &lt;strong&gt;fold&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;strong&gt;fold&lt;/strong&gt; is a function that takes two arguments and returns 
+a value.  It is absolutely critical that the output of the &lt;strong&gt;fold&lt;/strong&gt;
+be the same kind of thing as the first argument to the &lt;strong&gt;fold&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Remember this snippet from 5 seconds ago?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is where all the work of &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; gets done. We take the output
+of the &lt;strong&gt;fold&lt;/strong&gt; and put it right back into itself – with extra
+added ingredient &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;.  This creates a new &lt;code class=&quot;highlighter-rouge&quot;&gt;res&lt;/code&gt; – and the cycle 
+continues until the &lt;code class=&quot;highlighter-rouge&quot;&gt;sequence&lt;/code&gt; is complete.&lt;/p&gt;
+
+&lt;p&gt;Here’s a diagram of this &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;-loop if you’re more visually inclined:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/reduceFold.svg&quot; alt=&quot;visualization-of-reduce&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So you can bet if the output of the &lt;strong&gt;fold&lt;/strong&gt; is different than the
+input, something will break!&lt;/p&gt;
+
+&lt;p&gt;That’s all I’m going to say about the &lt;strong&gt;fold&lt;/strong&gt; for now.
+I cover how to write a good &lt;strong&gt;fold&lt;/strong&gt; extensively &lt;a href=&quot;https://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-sequence&quot;&gt;The &lt;strong&gt;sequence&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;strong&gt;sequence&lt;/strong&gt; can be anything you can use in a &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; loop – 
+so this can be a &lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tuple&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;set&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;,
+or any class or object that implements the &lt;code class=&quot;highlighter-rouge&quot;&gt;__iter__&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-initial-value&quot;&gt;The &lt;strong&gt;initial&lt;/strong&gt; value&lt;/h3&gt;
+
+&lt;p&gt;This is the first argument to the &lt;strong&gt;fold&lt;/strong&gt; function on the first
+iteration.  In Python’s implementation of &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt;, the 
+initial function is optional. If you don’t provide &lt;code class=&quot;highlighter-rouge&quot;&gt;initial&lt;/code&gt;, 
+the function works like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;(if &lt;code class=&quot;highlighter-rouge&quot;&gt;(initial, *sequence), *_ = args&lt;/code&gt; looks confusing, check out
+my article on WYSIWYG programming!)&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s a diagram that shows the flow when there is no initial argument:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/reduceNoInitial.svg&quot; alt=&quot;reduce-startup-when-no-initial-argument&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s a diagram that shows reduce when an initial argument is given:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/reduceInitial.svg&quot; alt=&quot;reduce-start-with-initial-argument-provided&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-key-to-reduce&quot;&gt;The key to &lt;strong&gt;reduce&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Hopefully it’s obvious now that &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; is fairly simple.
+Conceptually, it’s just a &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;-loop that repeatedly performs
+&lt;code class=&quot;highlighter-rouge&quot;&gt;res = fold(res, x)&lt;/code&gt; for &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; in a &lt;strong&gt;sequence&lt;/strong&gt;. The real
+art of &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; comes from understanding the &lt;strong&gt;fold&lt;/strong&gt;
+function.&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reading&quot;&gt;Further reading:&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/fp/functional/2019/09/08/how-to-reduce-python.html&quot;&gt;How to write a &lt;code class=&quot;highlighter-rouge&quot;&gt;fold&lt;/code&gt; function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;The actual implementation of &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; takes two or three arguments.
+The two argument form uses the first value of the &lt;strong&gt;sequence&lt;/strong&gt; as the 
+&lt;strong&gt;initial&lt;/strong&gt; value.
+!&lt;/p&gt;
+      &lt;ol&gt;
+        &lt;li&gt;The &lt;strong&gt;fold&lt;/strong&gt; function&lt;/li&gt;
+        &lt;li&gt;The &lt;strong&gt;sequence&lt;/strong&gt;&lt;/li&gt;
+        &lt;li&gt;The &lt;strong&gt;initial&lt;/strong&gt; data&lt;/li&gt;
+      &lt;/ol&gt;
+      &lt;p&gt;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;If you use a &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt; and you want to do keys AND values,
+use the &lt;code class=&quot;highlighter-rouge&quot;&gt;.items()&lt;/code&gt; method! &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;I’ll post it here when I write it. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </description>
-        <pubDate>Sun, 08 Sep 2019 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/jekyll/update/2019/09/08/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2019/09/08/welcome-to-jekyll.html</guid>
+        <pubDate>Mon, 09 Sep 2019 00:00:00 -0400</pubDate>
+        <link>http://hiimjayhireme.github.io/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</link>
+        <guid isPermaLink="true">http://hiimjayhireme.github.io/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</guid>
         
         
-        <category>jekyll</category>
+        <category>Python</category>
         
-        <category>update</category>
+        <category>FP</category>
+        
+        <category>functional</category>
+        
+        <category>reduce</category>
         
       </item>
     
@@ -57,7 +183,7 @@ category and so you need to understand how &lt;code class=&quot;highlighter-roug
 
 &lt;p&gt;This article will not directly cover:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; works&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/fp/functional/reduce/2019/09/09/how-reduce-works.html&quot;&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; works&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Why and when to use &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Good style for writing &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Advanced patterns using &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt;&lt;/li&gt;
@@ -184,7 +310,7 @@ code comments, &lt;code class=&quot;highlighter-rouge&quot;&gt;xs&lt;/code&gt;, 
 (&lt;code class=&quot;highlighter-rouge&quot;&gt;initial&lt;/code&gt;) or the &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; function on line 13 are all a &lt;em&gt;list&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;Here you can see the operation occuring explicitly:&lt;/p&gt;
-&lt;iframe width=&quot;100%&quot; height=&quot;600&quot; frameborder=&quot;0&quot; src=&quot;http://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&amp;amp;codeDivHeight=400&amp;amp;codeDivWidth=350&amp;amp;cumulative=false&amp;amp;curInstr=15&amp;amp;heapPrimitives=nevernest&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;600&quot; frameborder=&quot;0&quot; src=&quot;https://pythontutor.com/iframe-embed.html#code=from%20functools%20import%20reduce%0A%23%20cumulative%20sum%0A%0A%23%20fold%20function%0Adef%20next_csum%28xs%3A%20list,%20x%29%20-%3E%20list%3A%0A%20%20%23%20note%20that%20%60xs%60%20and%20the%20%60return%60%20are%20both%20%60list%60%0A%20%20if%20len%28xs%29%20%3D%3D%200%3A%0A%20%20%20%20return%20%5Bx%5D%0A%20%20else%3A%0A%20%20%20%20return%20%5B*xs,%20xs%5B-1%5D%20%2B%20x%5D%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20sequence%20%3D%20range%2810%29%0A%20%20initial%20%3D%20%5B%5D%0A%20%20print%28reduce%28next_csum,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sequence,%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial%20%23%20%3C---%20note%20that%20the%20INITIAL%20value%20is%20ALSO%20a%20list%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%0A&amp;amp;codeDivHeight=400&amp;amp;codeDivWidth=350&amp;amp;cumulative=false&amp;amp;curInstr=15&amp;amp;heapPrimitives=nevernest&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false&quot;&gt; &lt;/iframe&gt;
 
 &lt;p&gt;In future articles we’ll cover:&lt;/p&gt;
 
@@ -207,8 +333,8 @@ code comments, &lt;code class=&quot;highlighter-rouge&quot;&gt;xs&lt;/code&gt;, 
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 08 Sep 2019 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/python/fp/functional/2019/09/08/how-to-reduce-python.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/fp/functional/2019/09/08/how-to-reduce-python.html</guid>
+        <link>http://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html</link>
+        <guid isPermaLink="true">http://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html</guid>
         
         
         <category>Python</category>
