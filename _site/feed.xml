@@ -4,10 +4,10 @@
     <title>Jay's Notes</title>
     <description>Hi!  I'm Jay, and I love coding!  Especially in the style of Functional Programming. I've made some notes about things that are important to me.  I hope you find them helpful in your journey!
 </description>
-    <link>http://hiimjayhireme.github.io/</link>
-    <atom:link href="http://hiimjayhireme.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 09 Sep 2019 21:56:12 -0400</pubDate>
-    <lastBuildDate>Mon, 09 Sep 2019 21:56:12 -0400</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 09 Sep 2019 22:04:47 -0400</pubDate>
+    <lastBuildDate>Mon, 09 Sep 2019 22:04:47 -0400</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -66,6 +66,10 @@ of the &lt;strong&gt;fold&lt;/strong&gt; and put it right back into itself – w
 added ingredient &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;.  This creates a new &lt;code class=&quot;highlighter-rouge&quot;&gt;res&lt;/code&gt; – and the cycle 
 continues until the &lt;code class=&quot;highlighter-rouge&quot;&gt;sequence&lt;/code&gt; is complete.&lt;/p&gt;
 
+&lt;p&gt;Step through this code to get a better idea of what’s going on:&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; frameborder=&quot;0&quot; src=&quot;https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20sequence,%20initial%29%3A%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29,%200%29%29&amp;amp;codeDivHeight=400&amp;amp;codeDivWidth=350&amp;amp;cumulative=false&amp;amp;curInstr=6&amp;amp;heapPrimitives=nevernest&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false&quot;&gt; &lt;/iframe&gt;
+
 &lt;p&gt;Here’s a diagram of this &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;-loop if you’re more visually inclined:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/reduceFold.svg&quot; alt=&quot;visualization-of-reduce&quot; /&gt;&lt;/p&gt;
@@ -102,6 +106,10 @@ the function works like this:&lt;/p&gt;
 
 &lt;p&gt;(if &lt;code class=&quot;highlighter-rouge&quot;&gt;(initial, *sequence), *_ = args&lt;/code&gt; looks confusing, check out
 my article on WYSIWYG programming!)&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;You can step through the above code here:&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; frameborder=&quot;0&quot; src=&quot;https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20*args%29%3A%0A%20%20%20%20if%20len%28args%29%20%3D%3D%202%3A%0A%20%20%20%20%20%20%20%20sequence,%20initial%20%3D%20args%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%28initial,%20*sequence%29,%20*_%20%3D%20args%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29%29%29&amp;amp;codeDivHeight=400&amp;amp;codeDivWidth=350&amp;amp;cumulative=false&amp;amp;curInstr=5&amp;amp;heapPrimitives=nevernest&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false&quot;&gt; &lt;/iframe&gt;
 
 &lt;p&gt;Here’s a diagram that shows the flow when there is no initial argument:&lt;/p&gt;
 
@@ -152,8 +160,8 @@ use the &lt;code class=&quot;highlighter-rouge&quot;&gt;.items()&lt;/code&gt; me
 &lt;/div&gt;
 </description>
         <pubDate>Mon, 09 Sep 2019 00:00:00 -0400</pubDate>
-        <link>http://hiimjayhireme.github.io/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</link>
-        <guid isPermaLink="true">http://hiimjayhireme.github.io/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</guid>
+        <link>http://localhost:4000/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/fp/functional/reduce/2019/09/09/how-reduce-works.html</guid>
         
         
         <category>Python</category>
@@ -333,8 +341,8 @@ code comments, &lt;code class=&quot;highlighter-rouge&quot;&gt;xs&lt;/code&gt;, 
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 08 Sep 2019 00:00:00 -0400</pubDate>
-        <link>http://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html</link>
-        <guid isPermaLink="true">http://hiimjayhireme.github.io/python/fp/functional/2019/09/08/how-to-reduce-python.html</guid>
+        <link>http://localhost:4000/python/fp/functional/2019/09/08/how-to-reduce-python.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/fp/functional/2019/09/08/how-to-reduce-python.html</guid>
         
         
         <category>Python</category>

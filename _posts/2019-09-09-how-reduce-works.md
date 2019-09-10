@@ -68,6 +68,10 @@ of the **fold** and put it right back into itself -- with extra
 added ingredient `x`.  This creates a new `res` -- and the cycle 
 continues until the `sequence` is complete.
 
+Step through this code to get a better idea of what's going on:
+
+<iframe width="100%" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20sequence,%20initial%29%3A%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29,%200%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=6&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+
 Here's a diagram of this `for`-loop if you're more visually inclined:
 
 ![visualization-of-reduce](/assets/img/reduceFold.svg)
@@ -108,6 +112,10 @@ def reduce(fold, *args):
 
 (if `(initial, *sequence), *_ = args` looks confusing, check out
 my article on WYSIWYG programming!)[^3]
+
+You can step through the above code here:
+
+<iframe width="100%" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20*args%29%3A%0A%20%20%20%20if%20len%28args%29%20%3D%3D%202%3A%0A%20%20%20%20%20%20%20%20sequence,%20initial%20%3D%20args%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%28initial,%20*sequence%29,%20*_%20%3D%20args%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=5&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 Here's a diagram that shows the flow when there is no initial argument:
 

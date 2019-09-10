@@ -10,8 +10,8 @@
   <meta name="description" content="Intended Audience">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://hiimjayhireme.github.io/python/fp/functional/reduce/2019/09/09/how-reduce-works.html">
-  <link rel="alternate" type="application/rss+xml" title="Jay's Notes" href="http://hiimjayhireme.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/python/fp/functional/reduce/2019/09/09/how-reduce-works.html">
+  <link rel="alternate" type="application/rss+xml" title="Jay's Notes" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -118,6 +118,10 @@ of the <strong>fold</strong> and put it right back into itself – with extra
 added ingredient <code class="highlighter-rouge">x</code>.  This creates a new <code class="highlighter-rouge">res</code> – and the cycle 
 continues until the <code class="highlighter-rouge">sequence</code> is complete.</p>
 
+<p>Step through this code to get a better idea of what’s going on:</p>
+
+<iframe width="100%" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20sequence,%20initial%29%3A%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29,%200%29%29&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=6&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe>
+
 <p>Here’s a diagram of this <code class="highlighter-rouge">for</code>-loop if you’re more visually inclined:</p>
 
 <p><img src="/assets/img/reduceFold.svg" alt="visualization-of-reduce" /></p>
@@ -154,6 +158,10 @@ the function works like this:</p>
 
 <p>(if <code class="highlighter-rouge">(initial, *sequence), *_ = args</code> looks confusing, check out
 my article on WYSIWYG programming!)<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup></p>
+
+<p>You can step through the above code here:</p>
+
+<iframe width="100%" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20reduce%28fold,%20*args%29%3A%0A%20%20%20%20if%20len%28args%29%20%3D%3D%202%3A%0A%20%20%20%20%20%20%20%20sequence,%20initial%20%3D%20args%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%28initial,%20*sequence%29,%20*_%20%3D%20args%0A%20%20%20%20res%20%3D%20initial%0A%20%20%20%20for%20x%20in%20sequence%3A%0A%20%20%20%20%20%20%20%20res%20%3D%20fold%28res,%20x%29%0A%20%20%20%20return%20res%0A%20%20%20%20%0Aif%20__name__%20%3D%3D%20'__main__'%3A%0A%20%20%20%20from%20operator%20import%20add%0A%20%20%20%20print%28reduce%28add,%20range%2810%29%29%29&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=5&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe>
 
 <p>Here’s a diagram that shows the flow when there is no initial argument:</p>
 
