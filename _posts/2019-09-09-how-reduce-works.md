@@ -7,7 +7,7 @@ categories: Python FP functional reduce
 
 ## Intended Audience 
 
-You've have a basic idea of how `map` and `filter` work, but `reduce`
+You have a basic idea of how `map` and `filter` work, but `reduce`
 remains elusive and you want to learn more about it.
 You might even be flirting with the forbidden path 
 of Functional Programming. 

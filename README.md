@@ -1,4 +1,5 @@
 # jjtolton.github.io
 Blog
 
-Please visit https://jjtolton.github.io.
+
+You can see the blog [here](https://www.jjtolton.com).
