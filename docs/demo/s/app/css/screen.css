@@ -1,0 +1,194 @@
+:root {
+    --medium-font: 3rem;
+    --big-font: 5rem;
+    --small-font: 1rem;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5rem;
+    padding: 1rem;
+    margin: 3rem;
+}
+
+.main-content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-management {
+    display: flex;
+    flex-direction: column;
+}
+
+div.username {
+    padding: 0;
+    margin: 0;
+}
+
+.welcome-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username {
+    font-size: var(--big-font);
+}
+
+button {
+    background-color: white;
+    border: 3px solid black;
+    padding: 0.5rem;
+}
+
+button.logout {
+    border-radius: 0.5em;
+    border-width: 1px;
+    border-style: dashed;
+    margin-bottom: 2rem;
+}
+
+.user-preferences {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: var(--medium-font);
+}
+
+label.warning-threshold-adjuster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label.city-search {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+
+label.city-search > div.city-search-text {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    
+    /* background-color: pink; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+ }
+
+div.city-search-text {
+    padding: 0;
+    margin: 0;
+    font-size: 3rem;
+}
+
+
+
+
+div.warning-threshold-adjuster > input {
+    background-color: lightblue;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+ 
+::-webkit-input-placeholder { /* Edge */
+  color: black;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::placeholder {
+  color: black;
+}
+
+/* div.search { */
+/*     padding: 0; */
+/*     margin: 0; */
+/*     border: 5px solid black; */
+/*     height: 1em; */
+/* } */
+
+.ant-select.ant-select-auto-complete.ant-select-single.ant-select-show-search {
+    margin: 0;
+    padding: 0;
+}
+
+span.ant-select-selection-placeholder {
+    color: black;
+    text-align: center;
+}
+
+.ant-select-item-option-content {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.ant-select.ant-select-auto-complete.ant-select-single > .ant-select-selector {
+    background-color: lightblue;
+    border-radius: 1em;
+    border-thickness: 3px;
+    border-color: black;
+    
+    
+}
+
+input.ant-select-selection-search-input.ant-select-selection-search-input.ant-select-selection-search-input.ant-select-selection-search-input {
+    /* background-color: lightblue; */
+    /* border-radius: 1rem; */
+    text-align: center;
+    width: 100%;
+}
+
+.aqi-warning {
+    padding: 10em;
+    border: 3px solid black;
+    border-radius: 3rem;
+}
+
+.aqi-warning-overview {
+    text-align: center;
+    font-size: 1.75rem;
+}
+
+.aqi-safe {
+    background: radial-gradient(white, lightblue);
+}
+
+.aqi-warning-number {
+    text-align: center;
+    font-size: var(--big-font);
+}
+
+.aqi-warning-text {
+    text-align: center;
+    font-size: var(--medium-font);
+}
+
+.aqi-danger-danger {
+    background: radial-gradient(white, red);
+    border-color: red;
+}
+
